@@ -1,0 +1,214 @@
+
+
+btns.forEach(btn => {
+  btn.addEventListener("click", ()=> {
+    // if (input.value== "0") input.value="";
+    if (!action) {
+      console.log("no action click");
+      console.log(input.value);
+      if (input.value) {
+      curr==0 ? curr=input.value+btn.innerHTML : curr+=btn.innerHTML;
+      expression=checkLength(curr);
+      input.value = expression;
+      }
+      console.log("curr "+curr);
+    } else {
+      console.log("after action click");
+      curr==0 ? curr=btn.innerHTML : curr+=btn.innerHTML;
+      expression+=curr[curr.length-1];
+      input.value = expression;
+    }
+  })  
+})
+
+
+const checkLength = (num) => {
+ return num.toString().length > 11 ? Number(num.toString().slice(0,11)) : num;
+}
+
+const trimInput = (e) => {  
+    curr=e.target.value.trim().replace("+","").replace("-","");
+    return curr;
+  }
+
+const updateCurr = (e)=> {
+  if (e.target.value.slice(-1)=="+") {
+    memory.innerHTML=curr+"+";
+    return;
+  }
+  curr=e.target.value;
+  console.log(curr);
+}
+
+
+controls.forEach(ctrl=> {
+  ctrl.addEventListener("click",()=>{
+    if(action) {
+      switch (action) {
+        case 'sum':
+          console.log("plus");
+          console.log("prev "+prev);
+          console.log("curr "+curr);
+          input.value=curr=sum(prev,curr);
+          break;
+        case 'minus':
+          console.log("Minus)")
+          input.value=curr=minus(prev.curr);
+          action="";
+          break;
+        default:
+          break;
+    }
+    expression
+    return;
+    }
+    action=ctrl.id;
+    console.log(action);
+    expression+=ctrl.innerHTML;
+    input.value=expression;
+    prev=curr;
+    curr=0;
+  })
+ 
+})
+
+// prev=null; curr=null;
+
+// on number click => 
+// if(!action) {
+// curr+=button.innerhtml;
+// expression=curr;
+// input.value = expression;
+// } else {
+// curr+=button.innerhtml;
+// expression+=curr;
+// }
+
+
+
+// on ctrl click = 
+// action="plus";
+// expression+=ctrl.innerhtml;
+// prev=curr;
+// curr=null;
+
+
+
+
+
+
+const output = document.querySelector('.btn-output');
+const input = document.querySelector('.digits');
+const memory = document.querySelector('.memory');
+const squareBtn = document.getElementById('sqrt');
+const clearAll = document.getElementById('clear-all');
+const clearEntry = document.getElementById('clear-entry');
+const plus = document.getElementById('sum');
+const minus = document.getElementById('minus');
+const mult = document.getElementById('multiply');
+const div = document.getElementById('div');
+const equal = document.getElementById('equal');
+
+const numBtns = document.querySelectorAll('.num');
+const ctrlBtns = Array.from(document.querySelectorAll('.ctrl'));
+
+let curr=0, prev=0, action="";
+
+const typedInput = ()=> {
+  if (action) {
+    if (curr==0) {
+    console.log("inside action 1 "+input.value);
+    input.value=input.value.substring(2);
+    console.log("inside action 2 "+input.value);
+    }
+  }
+    if(input.value.slice(-1) == "+") {
+      console.log("+");
+      action="sum";
+      curr=input.value.replace(/\D/g, '');
+      prev=curr;
+      curr=0;
+      memory.innerHTML = prev + "+";
+    }
+    input.value=input.value.replace(/\D/g, '');
+  curr=input.value;
+  console.log("curr "+curr);
+}
+
+
+
+
+input.addEventListener("input", typedInput);
+
+numBtns.forEach(btn => {
+  btn.addEventListener("click", ()=> {
+    if (!action) {
+    curr=input.value+btn.innerHTML; 
+    } else {
+      if (curr==0) {input.value=""};
+      curr=input.value+btn.innerHTML;
+
+    }
+    input.value=curr;
+    console.log("curr "+curr);
+
+  })  
+})
+
+ctrlBtns.forEach(ctrl=> {
+  ctrl.addEventListener("click",()=>{
+    action=ctrl.id;
+    prev=curr;
+    curr=0;
+    memory.innerHTML = prev + ctrl.innerHTML;
+})
+});
+
+squareBtn.addEventListener("click",()=> {
+  console.log(curr);
+  memory.innerHTML="√"+curr;
+  input.value = curr = sqrt(curr);
+})
+
+clearAll.addEventListener("click",()=> {
+  resetAll();
+})
+
+clearEntry.addEventListener("click",()=> {
+  if(curr.toString().length <2) {
+    resetAll();
+  return;}
+  input.value = curr = curr.toString().slice(0,-1);
+})
+
+const resetAll = ()=> {
+  curr=0;
+  prev=0;
+  expression=0;
+  input.value="";
+  action="";
+  memory.innerHTML="";
+}
+
+const sum = (a,b) => Number(a)+Number(b);
+const min = (a,b) => a-b;
+const multiply = (a,b) => a*b;
+const divide = (a,b) => a/b;
+const sqrt = (a) => Math.round(Math.sqrt(a) * 100000000) / 100000000;
+
+
+
+equal.addEventListener("click", ()=> {
+  switch (action) {
+    case 'sum':
+	    memory.innerhtml=curr+equal.innerHtml;
+      let temp = curr; 
+      curr = sum(prev,curr); 
+      prev=temp;
+      input.innerHtml=curr;
+      action="";
+      break;
+    default:
+      break;
+}
+});

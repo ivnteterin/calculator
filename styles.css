@@ -1,0 +1,227 @@
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient( to right,#00adf8,#00f976);
+  height:100vh;
+}
+
+footer {
+  position: absolute;
+  text-align: center;
+  bottom: 10px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  opacity: .5;
+
+}
+
+.digits {
+  font-size: 3.3rem;
+    color: white;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    padding: 1rem;
+    width:100%;
+    -webkit-appearance: none;
+    appearance: none;
+    
+
+}
+
+.container {
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.digits:hover {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.calculator {
+  width:max-content;
+  height:max-content;
+  /* margin: 0 auto; */
+  /* top:50%;
+  position: relative;
+  transform:translateY(-50%); */
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  font-size: 2.3rem;
+  background-color: #e6fbf7;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  display: grid;
+  grid-template-areas:
+    'input input input input'
+    'AC CE SQRT DIV'
+    '1 2 3 MULT'
+    '4 5 6 PLUS'
+    '7 8 9 MIN'
+    'DOT 0 EXP EQL';
+    grid-gap: 3px;
+}
+
+sup {
+  font-size: 50%;
+  line-height: 0;
+  position: relative;
+  top: -0.5em;
+  vertical-align: baseline;
+}
+
+.keys-img {
+  height: 20rem;
+  border: 1px solid #80808080;
+  border-radius: 10px;
+  padding: 1rem;
+  opacity: .85;
+}
+.keys-img-small {
+  display: none;
+  border: 1px solid #80808080;
+  border-radius: 10px;
+  padding: 1rem;
+  height: 100%;
+  opacity: .85;
+}
+
+.input { 
+  grid-area: input;
+  background-color: #00362d;
+  height: 8rem;
+  cursor:text;
+  caret-color: transparent;
+  position: relative;
+  text-align: right;
+
+ }
+ 
+.memory {
+  position: absolute;
+  right: 1rem;
+  top: 0.8rem;
+  color: white;
+  font-size: 1.6rem;
+  opacity: .3;
+}
+
+input {
+  all: unset;
+}
+
+.btn, .btn-output, .btn-ace {
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:#bff5eb;
+  height: 6rem;
+  width: 6rem;
+  font-weight: bold;
+}
+
+.btn-output {
+  width:auto;
+  background-color: #e6fbf7;
+  font-weight: bold;
+}
+
+.btn-1:nth-of-type(1) { grid-area: AC }
+.btn-1:nth-of-type(2) { grid-area: CE; }
+.btn-1:nth-of-type(3) { grid-area: SQRT; }
+/* .btn-1:nth-of-type(4) { grid-area: DIV; } */
+
+.btn-2:nth-of-type(1) { grid-area: 1 }
+.btn-2:nth-of-type(2) { grid-area: 2; }
+.btn-2:nth-of-type(3) { grid-area: 3; }
+.btn-2:nth-of-type(4) { grid-area: MULT; }
+
+
+.btn-3:nth-of-type(1) { grid-area: 4 }
+.btn-3:nth-of-type(2) { grid-area: 5; }
+.btn-3:nth-of-type(3) { grid-area: 6; }
+.btn-3:nth-of-type(4) { grid-area: PLUS; }
+
+
+.btn-4:nth-of-type(1) { grid-area: 7 }
+.btn-4:nth-of-type(2) { grid-area: 8; }
+.btn-4:nth-of-type(3) { grid-area: 9; }
+.btn-4:nth-of-type(4) { grid-area: MIN; }
+
+.btn-5:nth-of-type(1) { grid-area: DOT }
+.btn-5:nth-of-type(2) { grid-area: 0; }
+.btn-5:nth-of-type(2) { grid-area: EXP; }
+.btn-output { grid-area: EQL; }
+
+
+@media only screen and (max-width: 700px) {
+  .keys-img {
+    height: 15rem;
+  }
+  .container {
+    gap:2rem;
+  }
+  
+}
+
+@media only screen and (max-width: 560px) {
+
+  .keys-img {
+    display: none;
+  }
+  .keys-img-small {
+    display: block;
+    width: 16rem;
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+  .keys-img {
+    display: none;
+  }
+  .keys-img-small {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-height: 480px) {
+
+  footer {
+    text-align: right;
+    padding-right: 2rem;
+  }
+
+  @media only screen and (max-width: 620px) {
+
+    footer {
+      display: none;
+    }
+  }
+
+}
