@@ -137,6 +137,7 @@ const newAction = (e)=> {
     curr=0;
   }
   let updatedSign = e.target.innerHTML == "×" ? "*" : e.target.innerHTML;
+  if (updatedSign == "y") { updatedSign="^"; action="pow"};
   memory.innerHTML= prev + (signFromTypedInput || (action=="pow" ? "^" : updatedSign));
   trimMemory(sign);
 
