@@ -42,10 +42,11 @@ const addToInput = (num)=> {
   // console.log("ADDTOINPUT3 "+curr);
   
 
-  num==0 && curr.toString().includes(".") || curr=="-" || curr==-0 ? curr : curr=Number(curr);
+  num==0 && curr.toString().includes(".") || curr=="-" || curr=="-0" || curr===-0 ? curr : curr=Number(curr);
     
+  // console.log("ADDTOINPUT4  "+curr);
+  
   // if curr="-"
-    if(num=="-" && curr=="-") {return;} else {}
 
     if (num=="-") curr=num;
     if (num==".") curr+=num;
