@@ -38,16 +38,25 @@ const newInput = (e) => {
 
 const addToInput = (num)=> {
     isNaN(num) || curr.toString().length > 14 ? curr : curr+=num;
-    num==0 && curr.toString().includes(".") ? curr : curr=Number(curr);
+  console.log("num "+num);
+
+    num==0 && curr.toString().includes(".") || curr=="-" ? curr : curr=Number(curr);
+    
+  // if curr="-"
+
+
+
     if (num=="-") curr=num;
     if (num==".") curr+=num;
+
     updateInput();
   }
 
 const updateInput = () => {
+
   if(curr==Infinity) {invalidInput("Value too big"); return;};
   // console.log("UPDATE curr "+curr);
-  curr.toString().includes(".") && curr.toString().length <15 ? input.value=curr : input.value = checkLength(trimResult(curr,15));
+  curr.toString().includes(".") || curr.toString().length <15 ? input.value=curr : input.value = checkLength(trimResult(curr,15));
   if(err) invalidInput("Value too big");
 
   //if number is large
@@ -90,7 +99,7 @@ const trimMemory = (signStr)=> {
   if (!isSequential) {
   memory.innerHTML= (isNaN(newX[0]) ? (trimResult(x[0],8) || (modifiedMemoryOutput.toString().split("+")[0] +"+" + modifiedMemoryOutput.toString().split("e+")[1].split(/[=\^\/\*+-]/)[0])) : newX[0]) + `&nbsp;`+signStr+`&nbsp;` + newX[newX.length-1] +"=";
   } else {
-    memory.innerHTML = trimResult(x[0],8)+"=";
+    memory.innerHTML = trimResult(x[0],8)+signStr;
   }
 }
 }
@@ -122,7 +131,6 @@ const newAction = (e)=> {
   const sign=e.data || e.target.id;
   const minusPressed = sign=="-" || sign=="minus";
 
-  
   if(curr=="-" && !minusPressed) { curr=0;}
 
   if (action && minusPressed && !curr) { // *+/ and -
@@ -215,7 +223,7 @@ const doExpression = (signStr,whichFunc) => {
       invalidInput("Value too big");
       return;
     } else {
-      trimResult(curr,15);
+      curr=trimResult(curr,15);
       updateInput();
     }
   }
