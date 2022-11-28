@@ -37,22 +37,25 @@ const newInput = (e) => {
 //gets added to main input as number is being typed out or clicked
 
 const addToInput = (num)=> {
-    isNaN(num) || curr.toString().length > 14 ? curr : curr+=num;
-  console.log("num "+num);
+  isNaN(num) || curr.toString().length > 14 ? curr : curr+=num;
+  // console.log("num "+num);
+  // console.log("ADDTOINPUT3 "+curr);
+  
 
-    num==0 && curr.toString().includes(".") || curr=="-" ? curr : curr=Number(curr);
+  num==0 && curr.toString().includes(".") || curr=="-" || curr==-0 ? curr : curr=Number(curr);
     
   // if curr="-"
-
-
+    if(num=="-" && curr=="-") {return;} else {}
 
     if (num=="-") curr=num;
     if (num==".") curr+=num;
+
 
     updateInput();
   }
 
 const updateInput = () => {
+  // console.log("ADDTOINPUT5 "+curr);
 
   if(curr==Infinity) {invalidInput("Value too big"); return;};
   // console.log("UPDATE curr "+curr);
@@ -65,6 +68,7 @@ const updateInput = () => {
   curr.toString().includes("e+") ? curr=(Number(curr.toString().split("e+")[0])).toPrecision(Number(curr.toString().split("e+")[1])).split(".").join(""): curr;
   }
   checkLength(curr);
+  
   };
 
 const trimResult = (num,toLength) => {
