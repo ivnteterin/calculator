@@ -87,8 +87,12 @@ const trimMemory = (signStr)=> {
   newX.pop();
   // console.log("x "+x);
   let modifiedMemoryOutput  = memory.innerHTML;
+  if (!isSequential) {
   memory.innerHTML= (isNaN(newX[0]) ? (trimResult(x[0],8) || (modifiedMemoryOutput.toString().split("+")[0] +"+" + modifiedMemoryOutput.toString().split("e+")[1].split(/[=\^\/\*+-]/)[0])) : newX[0]) + `&nbsp;`+signStr+`&nbsp;` + newX[newX.length-1] +"=";
+  } else {
+    memory.innerHTML = trimResult(x[0],8)+"=";
   }
+}
 }
 
 const checkLength = (num)=> {
