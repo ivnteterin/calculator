@@ -16,7 +16,7 @@ const ctrlBtns = Array.from(document.querySelectorAll('.ctrl'));
 
 // global vars
 
-let curr=0, prev=0, action="", readyFor2ndInput=false, prevAction="", isSequential=false, err=null;
+let curr=0, prev=0, action="", readyFor2ndInput=false, prevAction="", isSequential=true, err=null;
 
 // end of global vars
 
@@ -25,6 +25,7 @@ let curr=0, prev=0, action="", readyFor2ndInput=false, prevAction="", isSequenti
 const newInput = (e) => {
   checkForErr();
   checkLength(curr);
+  // console.log(e.data || e.target.value);
   if (/^[eE\^\/\*+-]/.test(e.data)){newAction(e);return;} //handle typed controls.
 
   if (e.inputType =="deleteContentBackward") { clearEntry.click(); return; } //if backspace pressed  
@@ -67,8 +68,8 @@ const trimResult = (num,toLength) => {
 }
 
 const trimMemory = (signStr)=> {
-  console.log(memory.innerHTML.length);
-  console.log("memory.innerHTML "+memory.innerHTML);
+  // console.log(memory.innerHTML.length);
+  // console.log("memory.innerHTML "+memory.innerHTML);
   let x=memory.innerHTML;
   let newX=[];
   if(x.length>20) {
@@ -124,8 +125,9 @@ const newAction = (e)=> {
     addToInput("-");
     return;
   }
-  
-  if (action && curr) {calculateIt();readyFor2ndInput = true;};
+
+  if (action && curr && isSequential) {calculateIt();readyFor2ndInput = true;};
+  isSequential=true;
   
   let signFromTypedInput = e.data;
   if (signFromTypedInput=="/") signFromTypedInput="÷";
@@ -213,6 +215,7 @@ const doExpression = (signStr,whichFunc) => {
       updateInput();
     }
   }
+  readyFor2ndInput = false;
 }
 
 const invalidInput = (errMsg)=> {
@@ -276,20 +279,21 @@ const pow = (a,b) => Math.pow(a,b);
 
 //CONSOLE LOGS
 
-window.addEventListener("input",()=> {
-  LogInfo();
-})
+// window.addEventListener("input",()=> {
+//   LogInfo();
+// })
 
-window.addEventListener("click",()=> {
-  LogInfo();
-})
+// window.addEventListener("click",()=> {
+//   LogInfo();
+// })
 
 
-const LogInfo = ()=> {
-  console.log("{ CURRENT STATE")
-  console.log("curr = "+curr);
-  console.log("prev = "+prev);
-  console.log("action = "+action);
-  console.log("readyFor2ndInput = "+readyFor2ndInput);
-  console.log(" }");
-}
+// const LogInfo = ()=> {
+//   console.log("{ CURRENT STATE")
+//   console.log("curr = "+curr);
+//   console.log("prev = "+prev);
+//   console.log("action = "+action);
+//   console.log("readyFor2ndInput = "+readyFor2ndInput);
+//   console.log("isSequential = "+isSequential);
+//   console.log(" }");
+// }
